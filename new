@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+folder_name=''
+
+if [ -z "$1" ]; then
+      echo "No day number specified."
+      echo "Usage: ./new <day-number> - e.g. ./new 17"
+      exit 1
+fi
+
+
+printf -v folder_name "day%02d" $1
+
+# this will fail if there is already a folder with that name, which is probably good
+mkdir "${folder_name}"
+
+cp ./_skeleton.cpp "./${folder_name}/part1.cpp"
+echo "Created ./${folder_name}/part1.cpp"
+cp ./_skeleton.cpp "./${folder_name}/part2.cpp"
+echo "Created ./${folder_name}/part2.cpp"
+
+
