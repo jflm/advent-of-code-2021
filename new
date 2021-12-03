@@ -3,6 +3,7 @@
 set -e
 
 folder_name=''
+language='cpp'
 
 if [ -z "$1" ]; then
       echo "No day number specified."
@@ -10,15 +11,20 @@ if [ -z "$1" ]; then
       exit 1
 fi
 
+if [ -z "$2" ]; then
+      echo "No language specified, defaulting to ${language}."
+else
+      language="$2"
+fi
 
 printf -v folder_name "day%02d" $1
 
 # this will fail if there is already a folder with that name, which is probably good
 mkdir "${folder_name}"
 
-cp ./_skeleton.cpp "./${folder_name}/part1.cpp"
-echo "Created ./${folder_name}/part1.cpp"
-cp ./_skeleton.cpp "./${folder_name}/part2.cpp"
-echo "Created ./${folder_name}/part2.cpp"
+cp "./_skeleton.${language}" "./${folder_name}/part1.${language}"
+echo "Created ./${folder_name}/part1.${language}"
+cp "./_skeleton.${language}" "./${folder_name}/part2.${language}"
+echo "Created ./${folder_name}/part2.${language}"
 
 
