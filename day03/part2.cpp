@@ -13,21 +13,16 @@ int filter_winners(std::forward_list<std::string> rows, int len, bool invert);
 int main(void)
 {
 
-    static const int NUM_BITS = 5;
+    static const int NUM_BITS = 12;
 
     std::string n;
-
-    std::forward_list<std::string> o2;
-    std::forward_list<std::string> co2;
+    std::forward_list<std::string> rows;
 
     while (std::cin >> n)
-    {
-        o2.emplace_front(n);
-        co2.emplace_front(n);
-    }
+        rows.emplace_front(n);
 
-    int o2_rating = filter_winners(o2, NUM_BITS, false);
-    int co2_rating = filter_winners(co2, NUM_BITS, true);
+    int o2_rating = filter_winners(rows, NUM_BITS, false);
+    int co2_rating = filter_winners(rows, NUM_BITS, true);
 
     std::cout << "o2: " << o2_rating << ", co2: " << co2_rating << ", product: " << o2_rating * co2_rating << std::endl;
 }
@@ -39,23 +34,12 @@ int filter_winners(std::forward_list<std::string> rows, int len, bool invert)
     {
 
         if (size_of(rows) == 1)
-        {
             return btod(rows.front(), len);
-        }
 
         int ones = 0;
         int zeroes = 0;
         for (auto v : rows)
-        {
-            if (v[i] == '0')
-            {
-                zeroes++;
-            }
-            else
-            {
-                ones++;
-            }
-        }
+            v[i] == '0' ? zeroes++ : ones++;
 
         out <<= 1;
 
