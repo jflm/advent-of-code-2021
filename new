@@ -26,5 +26,7 @@ cp "./_skeleton.${language}" "./${folder_name}/part1.${language}"
 echo "Created ./${folder_name}/part1.${language}"
 cp "./_skeleton.${language}" "./${folder_name}/part2.${language}"
 echo "Created ./${folder_name}/part2.${language}"
-
-
+touch "./${folder_name}/sample.txt"
+echo "Created ./${folder_name}/sample.txt"
+touch "./${folder_name}/input.txt"
+echo "Created ./${folder_name}/input.txt"
