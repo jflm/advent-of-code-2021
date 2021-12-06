@@ -18,36 +18,26 @@ int main(void)
 
     while (scanf("%d,%d -> %d,%d", &x1, &y1, &x2, &y2) > 0)
     {
-        // if (x1 == x2 || y1 == y2)
-        // {
-        unsigned int from_x = std::min(x1, x2);
-        unsigned int to_x = std::max(x1, x2);
-        unsigned int from_y = std::min(y1, y2);
-        unsigned int to_y = std::max(y1, y2);
+        int x_direction = x1 == x2 ? 0 : (x2 > x1 ? 1 : -1);
+        int y_direction = y1 == y2 ? 0 : (y2 > y1 ? 1 : -1);
 
-        if (to_x > max_x)
-        {
-            max_x = to_x;
-        }
+        int upper_x = std::max(x1, x2);
+        int upper_y = std::max(y1, y2);
 
-        if (to_y > max_y)
-        {
-            max_y = to_y;
-        }
+        if (upper_x > max_x)
+            max_x = upper_x;
 
-        for (unsigned int x = from_x; x <= to_x; x++)
+        if (upper_y > max_y)
+            max_y = upper_y;
+
+        for (int x = x1, y = y1; (x_direction == 0 || x != x2 + x_direction) && (y_direction == 0 || y != y2 + y_direction);)
         {
-            for (unsigned int y = from_y; y <= to_y; y++)
-            {
-                std::cout << "mark at " << x << "," << y << std::endl;
-                point p = {x, y};
-                covered_squares[p] += 1;
-            }
+            point p = {x, y};
+            covered_squares[p] += 1;
+            x += x_direction;
+            y += y_direction;
         }
-        // }
     }
-
-    std::cout << "max x,y: " << max_x << "," << max_y << std::endl;
 
     int overlaps = 0;
     for (unsigned int x = 0; x <= max_x; x++)
